@@ -33,7 +33,8 @@ void setup(){
   
 //initialize the arduino main board's serial/UART and Control Pins
 //CTRL pin for G15 =3 and AX12 =8
-  G15ShieldInit(19200,3,8); 
+  Serial.begin(19200);
+  G15ShieldInit(&Serial,3,8);
   
 //call the init function to init servo obj
 

@@ -90,7 +90,7 @@ enum{
     
 
 //function protos   
-void G15ShieldInit(long baud, char G15_CTRL, char AX12_CTRL); 
+void G15ShieldInit(Stream *port_, char G15_CTRL, char AX12_CTRL); 
 void set_act(char ctrl);  
 //void waitTXC(void); 
 

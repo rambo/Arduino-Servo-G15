@@ -35,7 +35,8 @@ G15 servo2(2);
 void setup(){
   
 //initialize the arduino main board's serial/UART and Control Pins
-  G15ShieldInit(19200,3,8); 
+  Serial.begin(19200);
+  G15ShieldInit(&Serial,3,8);
   
 //call the init function to init servo obj
   servo1.init();           

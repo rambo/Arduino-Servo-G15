@@ -7,8 +7,11 @@
 #include "HardwareSerial.h"
 #include "G15.h"
 //variables
- char G15CTRL; 
- char AX12CTRL;
+char G15CTRL; 
+char AX12CTRL;
+
+Stream *port;
+
 
 // This Code is using Serial library, hence
 // baudrate 300, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, or 115200
@@ -16,9 +19,9 @@
 //EN1 Ctrl pin can be D8 or D2 for AX12 port
 //EN2 ctrl pin can be D9 or D3 for G15 port
 
-void G15ShieldInit(long baud, char G15_CTRL, char AX12_CTRL){
-    Serial.begin (baud) ; 
-    Serial.setTimeout(SerialTimeOut); 
+void G15ShieldInit(Stream *port_, char G15_CTRL, char AX12_CTRL){
+    port = port_;
+    port->setTimeout(SerialTimeOut); 
     G15CTRL=G15_CTRL;
     AX12CTRL=AX12_CTRL;
     
@@ -102,9 +105,9 @@ word G15::send_packet(byte ID, byte inst, byte* data, byte param_len)
     packet_len = TxBuff[3] + 4;         //# of bytes for the whole packet
     
     for(i=0; i<packet_len;i++){
-        Serial.write(TxBuff[i]);
+        port->write(TxBuff[i]);
     }
-    Serial.flush();
+    port->flush();
     //waitTXC();        //arduino version 1.01 only
        
     //Status[4]=0x00;       //clear status byte
@@ -124,13 +127,13 @@ word G15::send_packet(byte ID, byte inst, byte* data, byte param_len)
 
         
         setRX();                        //set to receive mode and start receiving from G15      
-        byte readcount= Serial.readBytes(Status, packet_len); 
+        byte readcount= port->readBytes(Status, packet_len); 
         
         setTX();                        //set back to tx mode to prevent noise into buffer
         
-        // Serial.write(0xAA); 
+        // port->write(0xAA); 
         // for(i=0; i<packet_len; i++)
-            // Serial.write(Status[i]); 
+            // port->write(Status[i]); 
             
         //Checking received bytes
         error=0;        //clear error 
@@ -626,9 +629,9 @@ void set_act(char ctrl){
     packet_len = TxBuff[3] + 4;         //# of bytes for the whole packet
     
     for(i=0; i<packet_len;i++){
-        Serial.write(TxBuff[i]);
+        port->write(TxBuff[i]);
     }
-    Serial.flush();
+    port->flush();
     //waitTXC();        //arduino version 1.01 only
 
 
