@@ -10,13 +10,13 @@ ID mismatch error:          0x0400
 packet checksum mismatch :  0x0800
 ====Lower 8 bits of word==========
 Error status return by G15:
-INST			0x0040		
-OVERLOAD		0x0020
-CHECKSUM		0x0010
-RANGE			0x0008
-OVERHEAT		0x0004
-ANGLELIMIT 	        0x0002
-VOLTAGE		        0x0001
+INST            0x0040      
+OVERLOAD        0x0020
+CHECKSUM        0x0010
+RANGE           0x0008
+OVERHEAT        0x0004
+ANGLELIMIT          0x0002
+VOLTAGE             0x0001
 */
 
 //declaration of variables & object
