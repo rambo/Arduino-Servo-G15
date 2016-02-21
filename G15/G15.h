@@ -17,8 +17,8 @@
 #define iSYNC_WRITE     0x83 //simultaneously control multiple actuators
 
 #define SerialTimeOut 100L 
-#define TxMode LOW
-#define RxMode HIGH
+#define TxMode HIGH
+#define RxMode LOW
 #define ConvertAngle2Pos(Angle) word(word(Angle)*1088UL/360UL)
 #define ConvertPos2Angle(Pos) float(Pos)*360.0/1088.0)
 #define ConvertTime(Time) word(Time*10UL)
